@@ -5,6 +5,10 @@ class UsersController < JsonApiController
     render json: [{ name: 'Qui' }, { name: 'Quo' }, { name: 'Qua' }]
   end
 
+  def me
+    jsonapi_render json: @current_user
+  end
+
   # def auth_token
   #   # user_info, access_token = Omniauth::Facebook.authenticate(params['code'])
   #   info = Omniauth::Facebook.authenticate(params['code'])

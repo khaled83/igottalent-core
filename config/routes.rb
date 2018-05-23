@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post '/token', to: 'tokens#create'
 
   resources :users, only: [:index]
+  get '/users/me', to: 'users#me'
 
   jsonapi_resources :videos do
     jsonapi_resources :user
