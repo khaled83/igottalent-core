@@ -1,6 +1,6 @@
 # config/initializers/jsonapi_resources.rb
 JSONAPI.configure do |config|
-  config.json_key_format = :underscored_key
+  config.json_key_format = :dasherized_key
   config.route_format = :dasherized_route
 
   config.allow_include = true
