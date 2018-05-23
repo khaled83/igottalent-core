@@ -4,7 +4,11 @@ class VideosController < JsonApiController
 
   # GET /videos
   def index
-    @videos = Video.all
+    if @current_user.admin?
+      @videos = Video.all
+    else
+      @videos = Video.find_by(user_id: @current_user.id) || []
+    end
 
     jsonapi_render json: @videos
   end
