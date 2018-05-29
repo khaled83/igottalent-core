@@ -21,6 +21,7 @@ class VideosController < JsonApiController
   # POST /videos
   def create
     @video = Video.new(resource_params)
+    @video.user_id = @current_user.id
 
     if @video.save
       jsonapi_render json: @video, status: :created
