@@ -6,9 +6,6 @@ class VideosController < JsonApiController
   def index
     if @current_user.admin?
       @videos = Video.all
-      # @videos.each do |video|
-      #   video.user = User.find(video.user_id)
-      # end
     else
       @videos = Video.find_by(user_id: @current_user.id) || []
     end
