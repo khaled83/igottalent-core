@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :videos
   # Creates or retrieves user form database using email as key.
   # @see: https://medium.com/@coorasse/rails-ember-google-oauth2-807e24c3266
   #
