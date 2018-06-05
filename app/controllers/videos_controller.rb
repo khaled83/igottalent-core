@@ -1,5 +1,5 @@
 class VideosController < JsonApiController
-  before_action :authenticate_request!
+  before_action :authenticate_request!, except: [:unauthorized]
   before_action :set_video, only: [:show, :update, :destroy]
 
   # GET /videos
@@ -7,7 +7,7 @@ class VideosController < JsonApiController
     if @current_user.admin?
       @videos = Video.all
     else
-      @videos = Video.find_by(user_id: @current_user.id) || []
+      @videos = Video.where(user_id: @current_user.id) || []
     end
 
     jsonapi_render json: @videos
@@ -43,6 +43,13 @@ class VideosController < JsonApiController
   def destroy
     @video.destroy
     head :no_content
+  end
+
+  # GET /videos/unauthorized
+  def unauthorized
+    @videos = Video.limit(3)
+    Rails.logger.info "Returning #{@videos.count} videos"
+    jsonapi_render json: @videos
   end
 
   def admin_action

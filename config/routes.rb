@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index]
   get '/users/me', to: 'users#me'
 
+  get '/videos/unauthorized', to: 'videos#unauthorized'
+
   jsonapi_resources :videos do
     jsonapi_resources :user
   end
