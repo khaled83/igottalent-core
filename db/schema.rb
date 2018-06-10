@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_29_063935) do
+ActiveRecord::Schema.define(version: 2018_06_05_110407) do
 
   create_table "users", force: :cascade do |t|
     t.string "email"
@@ -28,9 +28,12 @@ ActiveRecord::Schema.define(version: 2018_05_29_063935) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "approved", default: false
+    t.boolean "approved_admin", default: false
     t.integer "user_id"
     t.string "video_id"
+    t.boolean "approved_user"
+    t.boolean "live", default: false
+    t.index ["live"], name: "index_videos_on_live"
     t.index ["user_id"], name: "index_videos_on_user_id"
   end
 
