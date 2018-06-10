@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/users/me', to: 'users#me'
 
   get '/videos/unauthorized', to: 'videos#unauthorized'
+  get '/videos/me',           to: 'videos#me'
 
   jsonapi_resources :videos do
     jsonapi_resources :user
