@@ -54,4 +54,8 @@ Rails.application.configure do
 
   # Enable secret keys
   config.read_encrypted_secrets = true
+
+  # env variables
+  # TODO move to environment variables
+  ENV['FACEBOOK_REDIRECT_URI'] = 'http://localhost:4200/torii/redirect.html'
 end
