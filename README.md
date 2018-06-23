@@ -21,4 +21,10 @@ Things you may want to cover:
 
 * Deployment instructions
 
+- Setup new Heroku app: heroku create
+- Verify app: git config --list | grep heroku
+- Deploy code: **git push heroku master**
+
+@see https://devcenter.heroku.com/articles/getting-started-with-rails5#deploy-your-application-to-heroku
+
 * ...
