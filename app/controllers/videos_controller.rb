@@ -4,7 +4,7 @@ class VideosController < JsonApiController
 
   # GET /videos
   def index
-    @videos = Video.paginate(:page => params[:offset])
+    @videos = Video.order(created_at: :desc).paginate(:page => params[:offset])
     jsonapi_render json: @videos
   end
 
