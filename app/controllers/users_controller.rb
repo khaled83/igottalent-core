@@ -1,5 +1,6 @@
 class UsersController < JsonApiController
   before_action :authenticate_request!
+  before_action :set_video, only: [:update]
 
   def index
     render json: [{ name: 'Qui' }, { name: 'Quo' }, { name: 'Qua' }]
@@ -7,6 +8,21 @@ class UsersController < JsonApiController
 
   def me
     jsonapi_render json: @current_user
+  end
+
+  # PATCH/PUT /users/1
+  def update
+    if @user.update(resource_params)
+      jsonapi_render json: @user
+    else
+      jsonapi_render_errors json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_video
+    @user = User.find(params[:id])
   end
 
   # def auth_token
