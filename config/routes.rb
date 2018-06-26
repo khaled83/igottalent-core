@@ -14,4 +14,8 @@ Rails.application.routes.draw do
     jsonapi_resources :user
   end
 
+  jsonapi_resources :users do
+    jsonapi_resources :user
+  end
+
 end
