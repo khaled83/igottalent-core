@@ -1,17 +1,11 @@
+# @unused @deprecated @todo remove?
 class LeaderboardsController < ApplicationController
   before_action :query_options
 
   def show
     @lb = Boards.default_leaderboard
     @entries = entry_service.execute(query_options)
-    respond_to do |format|
-      format.html do
-        paginate
-      end
-      format.json do
-        render json: @entries
-      end
-    end
+    jsonapi_render json: @entries
   end
 
   private

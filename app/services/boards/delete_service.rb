@@ -1,8 +1,11 @@
 module Boards
   class DeleteService < Boards::Base
     def execute(options = {})
-      return unless member_exists?(options[:name])
-      leaderboard.remove_member(options[:name])
+      user = User.find(options[:id])
+      return false unless user.present?
+      name = user.email
+      return false unless member_exists?(name)
+      return leaderboard.remove_member(name).first
     end
 
     private
