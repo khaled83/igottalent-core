@@ -41,6 +41,9 @@ gem 'jsonapi-utils', '~> 0.7.2'
 # pagination
 gem 'will_paginate', '~> 3.1.0'
 
+# Leaderboards backed by Redis in Ruby
+gem 'leaderboard'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
