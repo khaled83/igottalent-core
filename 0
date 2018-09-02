@@ -1,0 +1,2 @@
+      invoke  active_record
+      remove    db/migrate/20180902053718_add_column_to_videos_change_defaults.rb
