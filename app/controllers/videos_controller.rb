@@ -5,18 +5,13 @@ class VideosController < JsonApiController
 
   # GET /videos
   def index
-    @videos = Video.order(created_at: :desc).paginate(:page => params[:offset])
-    jsonapi_render json: @videos
-  end
-
-  # return current user's videos
-  def me
-    if @current_user.admin?
-      @videos = Video.paginate(:page => params[:offset])
-    else
-      @videos = Video.where(user_id: @current_user.id) || []
+    # all videos
+    if params[:me].blank?
+      @videos = Video.order(created_at: :desc).paginate(:page => params[:offset])
+    # my videos (user)
+    else @current_user.admin.blank?
+      @videos = Video.where(user_id: @current_user.id).order(created_at: :desc).paginate(:page => params[:offset]) || []
     end
-
     jsonapi_render json: @videos
   end
 
