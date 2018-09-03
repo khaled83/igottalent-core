@@ -81,7 +81,7 @@ module Omniauth
               code: code,
               redirect_uri: 'http://localhost:4200/torii/redirect.html',
               client_id: Rails.application.secrets['facebook_app_id'],
-              client_secret: Rails.application.secrets['facebook_oauth_secret']
+              client_secret: Rails.application.secrets['facebook_app_secret']
           }
       }
     end

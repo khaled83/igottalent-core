@@ -1,6 +1,7 @@
 class VideosController < JsonApiController
   before_action :authenticate_request!, except: [:unauthorized]
   before_action :set_video, only: [:show, :update, :destroy]
+  after_action :video_viewed, only: [:show]
 
   # GET /videos
   def index
@@ -8,6 +9,7 @@ class VideosController < JsonApiController
     jsonapi_render json: @videos
   end
 
+  # return current user's videos
   def me
     if @current_user.admin?
       @videos = Video.paginate(:page => params[:offset])
@@ -65,5 +67,9 @@ class VideosController < JsonApiController
     # Use callbacks to share common setup or constraints between actions.
     def set_video
       @video = Video.find(params[:id])
+    end
+
+    def video_viewed
+      VideoViewedJob.perform_later @video
     end
 end
