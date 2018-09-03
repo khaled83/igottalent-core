@@ -1,13 +1,20 @@
 class VideosController < JsonApiController
-  before_action :authenticate_request!
+  before_action :authenticate_request!, except: [:unauthorized]
   before_action :set_video, only: [:show, :update, :destroy]
+  after_action :video_viewed, only: [:show]
 
   # GET /videos
   def index
+    @videos = Video.order(created_at: :desc).paginate(:page => params[:offset])
+    jsonapi_render json: @videos
+  end
+
+  # return current user's videos
+  def me
     if @current_user.admin?
-      @videos = Video.all
+      @videos = Video.paginate(:page => params[:offset])
     else
-      @videos = Video.find_by(user_id: @current_user.id) || []
+      @videos = Video.where(user_id: @current_user.id) || []
     end
 
     jsonapi_render json: @videos
@@ -21,6 +28,7 @@ class VideosController < JsonApiController
   # POST /videos
   def create
     @video = Video.new(resource_params)
+    @video.user_id = @current_user.id
 
     if @video.save
       jsonapi_render json: @video, status: :created
@@ -44,6 +52,13 @@ class VideosController < JsonApiController
     head :no_content
   end
 
+  # GET /videos/unauthorized
+  def unauthorized
+    @videos = Video.limit(3)
+    Rails.logger.info "Returning #{@videos.count} videos"
+    jsonapi_render json: @videos
+  end
+
   def admin_action
     authorize! :admin
   end
@@ -52,5 +67,9 @@ class VideosController < JsonApiController
     # Use callbacks to share common setup or constraints between actions.
     def set_video
       @video = Video.find(params[:id])
+    end
+
+    def video_viewed
+      VideoViewedJob.perform_later @video
     end
 end
