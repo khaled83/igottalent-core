@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20180523093810_add_approved_to_videos.rb

@@ -13,9 +13,9 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*
-/tmp/*
 !/log/.keep
 !/tmp/.keep
+/tmp/*
 
 # Ignore uploaded files in development
 /storage/*
@@ -24,3 +24,9 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore secret keys
+/config/secrets.yml
+
+# Ignore idea files
+/.idea
