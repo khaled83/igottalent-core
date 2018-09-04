@@ -8,11 +8,8 @@ class TokensController < ApplicationController
   #
   # @see: https://medium.com/@coorasse/rails-ember-google-oauth2-807e24c3266
   def create
-    Rails.logger.info "#KHA tokens:create: code => #{params['code']}"
     info = Omniauth::Facebook.authenticate(params['code'])
-    Rails.logger.info "#KHA Omniauth::Facebook Done: info => #{info}"
     user = User.from_facebook(info)
-    Rails.logger.info "#KHA User.from_facebook Done: info => #{user}"
     render json: payload(user), status: :ok
   end
 
