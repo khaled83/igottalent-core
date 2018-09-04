@@ -2,6 +2,7 @@ class VideosController < JsonApiController
   before_action :authenticate_request!, except: [:unauthorized]
   before_action :set_video, only: [:show, :update, :destroy]
   after_action :video_viewed, only: [:show]
+  after_action :video_created, only: [:create]
 
   # GET /videos
   def index
@@ -66,5 +67,9 @@ class VideosController < JsonApiController
 
     def video_viewed
       VideoViewedJob.perform_later @video
+    end
+
+    def video_created
+      VideoCreatedJob.perform_later @video
     end
 end
