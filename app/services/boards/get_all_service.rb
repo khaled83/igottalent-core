@@ -10,7 +10,7 @@ module Boards
         member[:id]      = JSON.parse(data)['id']
         member[:user_id] = JSON.parse(data)['user_id']
       end
-      members
+      members.sort_by {|m| m[:score]}.reverse!
     end
 
     private
