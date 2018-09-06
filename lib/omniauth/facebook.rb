@@ -79,7 +79,7 @@ module Omniauth
       {
           query: {
               code: code,
-              facebook_redirect_uri: Rails.application.secrets['facebook_redirect_uri'],
+              redirect_uri: Rails.application.secrets['facebook_redirect_uri'],
               client_id: Rails.application.secrets['facebook_app_id'],
               client_secret: Rails.application.secrets['facebook_app_secret']
           }
