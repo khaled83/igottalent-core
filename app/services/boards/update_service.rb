@@ -29,6 +29,7 @@ module Boards
     # User's total video count and leaderboard score are incremented.
     def video_created(video)
       name = member_name(video)
+      find_or_create(name)
       member_data = member_data(name)
       # update member data and score
       member_data['total_video_count'] += 1
