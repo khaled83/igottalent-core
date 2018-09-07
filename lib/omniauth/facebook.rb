@@ -81,7 +81,7 @@ module Omniauth
               code: code,
               redirect_uri: Rails.application.secrets['facebook_redirect_uri'] || ENV['FACEBOOK_REDIRECT_URI'],
               client_id: Rails.application.secrets['facebook_app_id'] || ENV['FACEBOOK_APP_ID'],
-              client_secret: Rails.application.secrets['facebook_app_secret'] || ENV['FACEBOOK_SECRET']
+              client_secret: Rails.application.secrets['facebook_app_secret'] || ENV['FACEBOOK_APP_SECRET']
           }
       }
     end
