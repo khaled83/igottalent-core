@@ -7,6 +7,8 @@ class Facebook
     app_access_token = @oauth.get_app_access_token
     @graph = Koala::Facebook::API.new(app_access_token)
     # get video reaction and comment count from fb
-    @graph.get_object("#{Rails.application.secrets['website_url']}/videos/#{video.id}", :fields => 'engagement')
+    website_url = Rails.application.secrets['website_url'] || ENV['WEBSITE_URL']
+    Rails.logger.info "video_url: #{website_url}/videos/#{video.id}"
+    @graph.get_object("#{website_url}/videos/#{video.id}", :fields => 'engagement')
   end
 end
