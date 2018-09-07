@@ -33,7 +33,9 @@ Things you may want to cover:
 
 - Setup new Heroku app: heroku create
 - Verify app: git config --list | grep heroku
+- Migrate database: **heroku run rake db:migrate**
 - Deploy code: **git push heroku master**
+- Console: **heroku run rails console**
 - Website url: https://young-shelf-10460.herokuapp.com
 
 @see https://devcenter.heroku.com/articles/getting-started-with-rails5#deploy-your-application-to-heroku
